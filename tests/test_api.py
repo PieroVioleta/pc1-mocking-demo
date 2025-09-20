@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from app.adapters_fake import FakeRatesAdapter
@@ -33,8 +34,10 @@ def test_convert_endpoint_ok():
 def test_convert_endpoint_validation():
     """
     GIVEN the FastAPI app with dependency override
-    WHEN calling GET /convert with amount=0 (invalid)
-    THEN the response status should be 400 (Bad Request)
+    WHEN calling GET /convert with amount=0 (invalid by query validation)
+    THEN the response status should be 422 (Unprocessable Entity)
     """
     r = client.get("/convert", params={"amount": 0, "from_": "USD", "to": "PEN"})
-    assert r.status_code == 400
+    assert r.status_code == 422
+    data = r.json()
+    assert data["detail"][0]["loc"][-1] == "amount"

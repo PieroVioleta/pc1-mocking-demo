@@ -16,10 +16,3 @@ class FakeRatesAdapter(RatesPort):
             return self.table[(from_, to)]
         except KeyError as exc:
             raise LookupError("currency pair not supported") from exc
-
-
-async def get_rate(self, from_: str, to: str) -> float:
-    try:
-        return self.table[(from_, to)]
-    except KeyError as exc:
-        raise LookupError("currency pair not supported") from exc

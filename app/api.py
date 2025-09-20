@@ -1,11 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import BaseModel
 
-
+from .adapters_fake import FakeRatesAdapter
 from .domain import ConversionService
 from .ports import RatesPort
-from .adapters_fake import FakeRatesAdapter
-
 
 router = APIRouter()
 
@@ -24,7 +22,12 @@ class ConvertResponse(BaseModel):
 
 
 @router.get("/convert", response_model=ConvertResponse)
-async def convert(amount: float = Field(gt=0), from_: str = "USD", to: str = "PEN", rates: RatesPort = Depends(get_rates_port)):
+async def convert(
+    amount: float = Query(..., gt=0),
+    from_: str = Query("USD"),
+    to: str = Query("PEN"),
+    rates: RatesPort = Depends(get_rates_port),
+):
     svc = ConversionService(rates)
     try:
         result = await svc.convert(amount, from_, to)

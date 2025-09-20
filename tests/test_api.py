@@ -1,9 +1,8 @@
 from fastapi.testclient import TestClient
 
-
-from app.main import app
 from app.adapters_fake import FakeRatesAdapter
 from app.api import get_rates_port
+from app.main import app
 
 
 def override_rates():

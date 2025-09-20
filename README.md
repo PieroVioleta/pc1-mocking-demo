@@ -3,7 +3,7 @@
 ## Integrantes
 - Piero Alexis Violeta Estrella - 20184065H
 - Andrés Sebastián La Torre Vasquez - 20212100C
-- 
+- Maxwel Paredes Lopez - 20191179E
 
 ## Instalar dependencias
 ```bash

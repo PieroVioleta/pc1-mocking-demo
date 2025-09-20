@@ -16,6 +16,12 @@ client = TestClient(app)
 
 
 def test_convert_endpoint_ok():
+    """
+    GIVEN   the FastAPI app with dependency override returning rate=3.0
+    WHEN    calling GET /convert with amount=100, from_=USD, to=PEN
+    THEN    the response status should be 200 and the JSON should include
+            rate=3.0, converted=300.0, and source="fake"
+    """
     r = client.get("/convert", params={"amount": 100, "from_": "USD", "to": "PEN"})
     assert r.status_code == 200
     data = r.json()
@@ -25,5 +31,10 @@ def test_convert_endpoint_ok():
 
 
 def test_convert_endpoint_validation():
+    """
+    GIVEN the FastAPI app with dependency override
+    WHEN calling GET /convert with amount=0 (invalid)
+    THEN the response status should be 400 (Bad Request)
+    """
     r = client.get("/convert", params={"amount": 0, "from_": "USD", "to": "PEN"})
     assert r.status_code == 400

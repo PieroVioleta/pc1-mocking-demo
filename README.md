@@ -15,7 +15,7 @@ La idea principal es desacoplar el acceso a un proveedor de tasas de cambio usan
 - Andrés Sebastián La Torre Vasquez — 20212100C
 - Maxwel Paredes Lopez — 20191179E
 - Franklin Espinoza Pari — 20210135D
-
+- Arturo Hinostroza Olivera — 20191548K
 ---
 
 ## Requisitos
